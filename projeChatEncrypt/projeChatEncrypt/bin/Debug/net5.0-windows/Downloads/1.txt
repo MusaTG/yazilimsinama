@@ -1,0 +1,50 @@
+  public static string EncryptString(string text, string password, bool compressText)
+        {
+            byte[] baPwd = Encoding.UTF8.GetBytes(password);
+
+            // Hash the password with SHA256
+            byte[] baPwdHash = SHA256Managed.Create().ComputeHash(baPwd);
+
+            byte[] baText = Encoding.UTF8.GetBytes(text);
+
+            if (compressText)
+                baText = Compressor.Compress(baText);
+
+            byte[] baSalt = GetRandomBytes();
+            byte[] baEncrypted = new byte[baSalt.Length + baText.Length];
+
+            // Combine Salt + Text
+            for (int i = 0; i < baSalt.Length; i++)
+                baEncrypted[i] = baSalt[i];
+            for (int i = 0; i < baText.Length; i++)
+                baEncrypted[i + baSalt.Length] = baText[i];
+
+            baEncrypted = AES_Encrypt(baEncrypted, baPwdHash);
+
+            string result = Convert.ToBase64String(baEncrypted);
+            return result;
+        }
+
+        public static string DecryptString(string text, string password, bool decompressText)
+        {
+            byte[] baPwd = Encoding.UTF8.GetBytes(password);
+
+            // Hash the password with SHA256
+            byte[] baPwdHash = SHA256Managed.Create().ComputeHash(baPwd);
+
+            byte[] baText = Convert.FromBase64String(text);
+
+            byte[] baDecrypted = AES_Decrypt(baText, baPwdHash);
+
+            // Remove salt
+            int saltLength = GetSaltLength();
+            byte[] baResult = new byte[baDecrypted.Length - saltLength];
+            for (int i = 0; i < baResult.Length; i++)
+                baResult[i] = baDecrypted[i + saltLength];
+
+            if (decompressText)
+                baResult = Compressor.Decompress(baResult);
+
+            string result = Encoding.UTF8.GetString(baResult);
+            return result;
+        }

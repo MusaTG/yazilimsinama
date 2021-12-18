@@ -1,0 +1,16 @@
+D:\Dersler\Yazılım Sınama\proje\projeChatEncrypt\ConsoleApp1\bin\Debug\net5.0\ConsoleApp1.exe
+D:\Dersler\Yazılım Sınama\proje\projeChatEncrypt\ConsoleApp1\bin\Debug\net5.0\ConsoleApp1.deps.json
+D:\Dersler\Yazılım Sınama\proje\projeChatEncrypt\ConsoleApp1\bin\Debug\net5.0\ConsoleApp1.runtimeconfig.json
+D:\Dersler\Yazılım Sınama\proje\projeChatEncrypt\ConsoleApp1\bin\Debug\net5.0\ConsoleApp1.runtimeconfig.dev.json
+D:\Dersler\Yazılım Sınama\proje\projeChatEncrypt\ConsoleApp1\bin\Debug\net5.0\ConsoleApp1.dll
+D:\Dersler\Yazılım Sınama\proje\projeChatEncrypt\ConsoleApp1\bin\Debug\net5.0\ref\ConsoleApp1.dll
+D:\Dersler\Yazılım Sınama\proje\projeChatEncrypt\ConsoleApp1\bin\Debug\net5.0\ConsoleApp1.pdb
+D:\Dersler\Yazılım Sınama\proje\projeChatEncrypt\ConsoleApp1\obj\Debug\net5.0\ConsoleApp1.csproj.AssemblyReference.cache
+D:\Dersler\Yazılım Sınama\proje\projeChatEncrypt\ConsoleApp1\obj\Debug\net5.0\ConsoleApp1.GeneratedMSBuildEditorConfig.editorconfig
+D:\Dersler\Yazılım Sınama\proje\projeChatEncrypt\ConsoleApp1\obj\Debug\net5.0\ConsoleApp1.AssemblyInfoInputs.cache
+D:\Dersler\Yazılım Sınama\proje\projeChatEncrypt\ConsoleApp1\obj\Debug\net5.0\ConsoleApp1.AssemblyInfo.cs
+D:\Dersler\Yazılım Sınama\proje\projeChatEncrypt\ConsoleApp1\obj\Debug\net5.0\ConsoleApp1.csproj.CoreCompileInputs.cache
+D:\Dersler\Yazılım Sınama\proje\projeChatEncrypt\ConsoleApp1\obj\Debug\net5.0\ConsoleApp1.dll
+D:\Dersler\Yazılım Sınama\proje\projeChatEncrypt\ConsoleApp1\obj\Debug\net5.0\ref\ConsoleApp1.dll
+D:\Dersler\Yazılım Sınama\proje\projeChatEncrypt\ConsoleApp1\obj\Debug\net5.0\ConsoleApp1.pdb
+D:\Dersler\Yazılım Sınama\proje\projeChatEncrypt\ConsoleApp1\obj\Debug\net5.0\ConsoleApp1.genruntimeconfig.cache
