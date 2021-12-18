@@ -56,6 +56,7 @@ namespace projeChatEncrypt
             this.columnHeader6 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader7 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader8 = new System.Windows.Forms.ColumnHeader();
+            this.btnUnZip = new System.Windows.Forms.Button();
             this.btnZip = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.txtPassword = new System.Windows.Forms.TextBox();
@@ -63,7 +64,6 @@ namespace projeChatEncrypt
             this.lstMessage = new System.Windows.Forms.ListBox();
             this.btnConnect = new System.Windows.Forms.Button();
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
-            this.btnUnZip = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -195,6 +195,7 @@ namespace projeChatEncrypt
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.listViewReceiver);
+            this.tabPage2.Controls.Add(this.btnUnZip);
             this.tabPage2.Location = new System.Drawing.Point(4, 24);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
@@ -214,7 +215,7 @@ namespace projeChatEncrypt
             this.listViewReceiver.HideSelection = false;
             this.listViewReceiver.Location = new System.Drawing.Point(6, 6);
             this.listViewReceiver.Name = "listViewReceiver";
-            this.listViewReceiver.Size = new System.Drawing.Size(409, 148);
+            this.listViewReceiver.Size = new System.Drawing.Size(409, 122);
             this.listViewReceiver.TabIndex = 0;
             this.listViewReceiver.UseCompatibleStateImageBehavior = false;
             this.listViewReceiver.View = System.Windows.Forms.View.Details;
@@ -242,7 +243,6 @@ namespace projeChatEncrypt
             // 
             this.tabPage3.Controls.Add(this.btnSendFile);
             this.tabPage3.Controls.Add(this.listViewSender);
-            this.tabPage3.Controls.Add(this.btnUnZip);
             this.tabPage3.Controls.Add(this.btnZip);
             this.tabPage3.Location = new System.Drawing.Point(4, 24);
             this.tabPage3.Name = "tabPage3";
@@ -296,6 +296,16 @@ namespace projeChatEncrypt
             // 
             this.columnHeader8.Text = "Toplam Süre";
             this.columnHeader8.Width = 100;
+            // 
+            // btnUnZip
+            // 
+            this.btnUnZip.Location = new System.Drawing.Point(6, 134);
+            this.btnUnZip.Name = "btnUnZip";
+            this.btnUnZip.Size = new System.Drawing.Size(409, 23);
+            this.btnUnZip.TabIndex = 2;
+            this.btnUnZip.Text = "Dosya Ayrıştır";
+            this.btnUnZip.UseVisualStyleBackColor = true;
+            this.btnUnZip.Click += new System.EventHandler(this.btnUnZip_Click);
             // 
             // btnZip
             // 
@@ -356,16 +366,6 @@ namespace projeChatEncrypt
             // 
             this.notifyIcon1.Text = "notifyIcon1";
             this.notifyIcon1.Visible = true;
-            // 
-            // btnUnZip
-            // 
-            this.btnUnZip.Location = new System.Drawing.Point(283, 134);
-            this.btnUnZip.Name = "btnUnZip";
-            this.btnUnZip.Size = new System.Drawing.Size(135, 23);
-            this.btnUnZip.TabIndex = 2;
-            this.btnUnZip.Text = "Dosya Ayrıştır";
-            this.btnUnZip.UseVisualStyleBackColor = true;
-            this.btnUnZip.Click += new System.EventHandler(this.btnUnZip_Click);
             // 
             // Form1
             // 

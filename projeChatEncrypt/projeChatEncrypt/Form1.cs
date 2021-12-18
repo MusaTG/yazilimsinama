@@ -255,10 +255,10 @@ namespace projeChatEncrypt
             {
                 this.Enabled = false; // Lock Main Window
                 string sourceZipFile = dosya;
-                string[] splitDosya = dosya.Split('.');
-                string[] pathDosya = splitDosya[0].Split("\\");
+                //string[] splitDosya = dosya.Split('.');
+                string[] pathDosya = sourceZipFile.Split("\\");
                 string path = "";
-                for (int i = 0; i < pathDosya.Length - 1; i++)
+                for (int i = 0; i < pathDosya.Length-1; i++)
                     path += (pathDosya[i] + @"\");
                 MessageBox.Show(path);
                 string targetFolder = path + "unZip";
@@ -269,9 +269,12 @@ namespace projeChatEncrypt
                 //string sourceZipFile = @"D:\Dersler\Yazılım Sınama\zipProje.zip";
 
                 string pathFolder = targetFolder + @"\NewEntry.ae";
-                MessageBox.Show(pathFolder + "\n" + targetFolder);
+
+                MessageBox.Show("path: "+pathFolder + "\ntarget: " + targetFolder+"\nsource: "+sourceZipFile);
                 //ZipFile.CreateFromDirectory(sourceFolder, targetZipFile);
                 await Task.Run(() => Crypt.DecryptFile("musa", pathFolder, targetFolder + @"\unZip.txt"));
+                File.Delete(pathFolder);
+                File.Delete(sourceZipFile);
                 MessageBox.Show("Çözme başarılı!");
             }
             catch (Exception ex)
