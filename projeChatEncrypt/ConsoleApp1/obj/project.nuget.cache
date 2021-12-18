@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "RULTvx16QU9HFFqxEQ4M2XggRCpCDZVZfURqFooePi6T/wLSUZAopwxA8hYGF+mr1kQTBNcg1ZCWGfoHOa2SFw==",
+  "dgSpecHash": "Y/Ascf6joFjtzRFVOH4ugWDLKin49MdRsdQ7+JN3nmlCIP/gNj7owDxmxZbcpAX3cInCGmx28DdE9DsJUJsARA==",
   "success": true,
-  "projectFilePath": "D:\\Dersler\\Yazılım Sınama\\proje\\projeChatEncrypt1\\projeChatEncrypt\\ConsoleApp1\\ConsoleApp1.csproj",
+  "projectFilePath": "C:\\Users\\MTG\\Desktop\\projeChatEncrypt1\\projeChatEncrypt\\ConsoleApp1\\ConsoleApp1.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

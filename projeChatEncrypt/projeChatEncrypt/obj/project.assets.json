@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Dersler\\Yazılım Sınama\\proje\\projeChatEncrypt1\\projeChatEncrypt\\projeChatEncrypt\\projeChatEncrypt.csproj",
+      "projectUniqueName": "C:\\Users\\MTG\\Desktop\\projeChatEncrypt1\\projeChatEncrypt\\projeChatEncrypt\\projeChatEncrypt.csproj",
       "projectName": "projeChatEncrypt",
-      "projectPath": "D:\\Dersler\\Yazılım Sınama\\proje\\projeChatEncrypt1\\projeChatEncrypt\\projeChatEncrypt\\projeChatEncrypt.csproj",
+      "projectPath": "C:\\Users\\MTG\\Desktop\\projeChatEncrypt1\\projeChatEncrypt\\projeChatEncrypt\\projeChatEncrypt.csproj",
       "packagesPath": "C:\\Users\\MTG\\.nuget\\packages\\",
-      "outputPath": "D:\\Dersler\\Yazılım Sınama\\proje\\projeChatEncrypt1\\projeChatEncrypt\\projeChatEncrypt\\obj\\",
+      "outputPath": "C:\\Users\\MTG\\Desktop\\projeChatEncrypt1\\projeChatEncrypt\\projeChatEncrypt\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\MTG\\AppData\\Roaming\\NuGet\\NuGet.Config",

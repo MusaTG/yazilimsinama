@@ -16,3 +16,21 @@ D:\Dersler\Yazılım Sınama\proje\projeChatEncrypt\projeChatEncrypt\obj\Debug\n
 D:\Dersler\Yazılım Sınama\proje\projeChatEncrypt\projeChatEncrypt\obj\Debug\net5.0-windows\ref\projeChatEncrypt.dll
 D:\Dersler\Yazılım Sınama\proje\projeChatEncrypt\projeChatEncrypt\obj\Debug\net5.0-windows\projeChatEncrypt.pdb
 D:\Dersler\Yazılım Sınama\proje\projeChatEncrypt\projeChatEncrypt\obj\Debug\net5.0-windows\projeChatEncrypt.genruntimeconfig.cache
+C:\Users\MTG\Desktop\projeChatEncrypt1\projeChatEncrypt\projeChatEncrypt\bin\Debug\net5.0-windows\projeChatEncrypt.exe
+C:\Users\MTG\Desktop\projeChatEncrypt1\projeChatEncrypt\projeChatEncrypt\bin\Debug\net5.0-windows\projeChatEncrypt.deps.json
+C:\Users\MTG\Desktop\projeChatEncrypt1\projeChatEncrypt\projeChatEncrypt\bin\Debug\net5.0-windows\projeChatEncrypt.runtimeconfig.json
+C:\Users\MTG\Desktop\projeChatEncrypt1\projeChatEncrypt\projeChatEncrypt\bin\Debug\net5.0-windows\projeChatEncrypt.runtimeconfig.dev.json
+C:\Users\MTG\Desktop\projeChatEncrypt1\projeChatEncrypt\projeChatEncrypt\bin\Debug\net5.0-windows\projeChatEncrypt.dll
+C:\Users\MTG\Desktop\projeChatEncrypt1\projeChatEncrypt\projeChatEncrypt\bin\Debug\net5.0-windows\ref\projeChatEncrypt.dll
+C:\Users\MTG\Desktop\projeChatEncrypt1\projeChatEncrypt\projeChatEncrypt\bin\Debug\net5.0-windows\projeChatEncrypt.pdb
+C:\Users\MTG\Desktop\projeChatEncrypt1\projeChatEncrypt\projeChatEncrypt\obj\Debug\net5.0-windows\projeChatEncrypt.csproj.AssemblyReference.cache
+C:\Users\MTG\Desktop\projeChatEncrypt1\projeChatEncrypt\projeChatEncrypt\obj\Debug\net5.0-windows\projeChatEncrypt.Form1.resources
+C:\Users\MTG\Desktop\projeChatEncrypt1\projeChatEncrypt\projeChatEncrypt\obj\Debug\net5.0-windows\projeChatEncrypt.csproj.GenerateResource.cache
+C:\Users\MTG\Desktop\projeChatEncrypt1\projeChatEncrypt\projeChatEncrypt\obj\Debug\net5.0-windows\projeChatEncrypt.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\MTG\Desktop\projeChatEncrypt1\projeChatEncrypt\projeChatEncrypt\obj\Debug\net5.0-windows\projeChatEncrypt.AssemblyInfoInputs.cache
+C:\Users\MTG\Desktop\projeChatEncrypt1\projeChatEncrypt\projeChatEncrypt\obj\Debug\net5.0-windows\projeChatEncrypt.AssemblyInfo.cs
+C:\Users\MTG\Desktop\projeChatEncrypt1\projeChatEncrypt\projeChatEncrypt\obj\Debug\net5.0-windows\projeChatEncrypt.csproj.CoreCompileInputs.cache
+C:\Users\MTG\Desktop\projeChatEncrypt1\projeChatEncrypt\projeChatEncrypt\obj\Debug\net5.0-windows\projeChatEncrypt.dll
+C:\Users\MTG\Desktop\projeChatEncrypt1\projeChatEncrypt\projeChatEncrypt\obj\Debug\net5.0-windows\ref\projeChatEncrypt.dll
+C:\Users\MTG\Desktop\projeChatEncrypt1\projeChatEncrypt\projeChatEncrypt\obj\Debug\net5.0-windows\projeChatEncrypt.pdb
+C:\Users\MTG\Desktop\projeChatEncrypt1\projeChatEncrypt\projeChatEncrypt\obj\Debug\net5.0-windows\projeChatEncrypt.genruntimeconfig.cache

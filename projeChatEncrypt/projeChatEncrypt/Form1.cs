@@ -200,9 +200,13 @@ namespace projeChatEncrypt
             if (file.ShowDialog() == DialogResult.OK)
                 foreach (string fileName in file.FileNames)
                 {
+                    sifreleAsync(fileName);
+                    string[] splitDosya = fileName.Split(".");
+                    string filePath = splitDosya[0] + ".zip";
+                    MessageBox.Show(filePath+"\nburdayım");
                     new Thread(() =>
                     {
-                        Sender.Send(ipAddress, port, fileName);
+                        Sender.Send(ipAddress, port, filePath);
                     }).Start();
                 }
             file.Dispose();
@@ -236,6 +240,7 @@ namespace projeChatEncrypt
                     archive.CreateEntryFromFile(sourceFolder, "NewEntry.ae");
                     //archive.ExtractToDirectory(path);
                 }
+                File.Delete(sourceFolder);
             }
             catch (Exception ex)
             {

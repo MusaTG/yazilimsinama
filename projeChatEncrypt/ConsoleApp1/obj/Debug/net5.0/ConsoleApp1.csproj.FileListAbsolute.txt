@@ -14,3 +14,19 @@ D:\Dersler\Yazılım Sınama\proje\projeChatEncrypt\ConsoleApp1\obj\Debug\net5.0
 D:\Dersler\Yazılım Sınama\proje\projeChatEncrypt\ConsoleApp1\obj\Debug\net5.0\ref\ConsoleApp1.dll
 D:\Dersler\Yazılım Sınama\proje\projeChatEncrypt\ConsoleApp1\obj\Debug\net5.0\ConsoleApp1.pdb
 D:\Dersler\Yazılım Sınama\proje\projeChatEncrypt\ConsoleApp1\obj\Debug\net5.0\ConsoleApp1.genruntimeconfig.cache
+C:\Users\MTG\Desktop\projeChatEncrypt1\projeChatEncrypt\ConsoleApp1\bin\Debug\net5.0\ConsoleApp1.exe
+C:\Users\MTG\Desktop\projeChatEncrypt1\projeChatEncrypt\ConsoleApp1\bin\Debug\net5.0\ConsoleApp1.deps.json
+C:\Users\MTG\Desktop\projeChatEncrypt1\projeChatEncrypt\ConsoleApp1\bin\Debug\net5.0\ConsoleApp1.runtimeconfig.json
+C:\Users\MTG\Desktop\projeChatEncrypt1\projeChatEncrypt\ConsoleApp1\bin\Debug\net5.0\ConsoleApp1.runtimeconfig.dev.json
+C:\Users\MTG\Desktop\projeChatEncrypt1\projeChatEncrypt\ConsoleApp1\bin\Debug\net5.0\ConsoleApp1.dll
+C:\Users\MTG\Desktop\projeChatEncrypt1\projeChatEncrypt\ConsoleApp1\bin\Debug\net5.0\ref\ConsoleApp1.dll
+C:\Users\MTG\Desktop\projeChatEncrypt1\projeChatEncrypt\ConsoleApp1\bin\Debug\net5.0\ConsoleApp1.pdb
+C:\Users\MTG\Desktop\projeChatEncrypt1\projeChatEncrypt\ConsoleApp1\obj\Debug\net5.0\ConsoleApp1.csproj.AssemblyReference.cache
+C:\Users\MTG\Desktop\projeChatEncrypt1\projeChatEncrypt\ConsoleApp1\obj\Debug\net5.0\ConsoleApp1.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\MTG\Desktop\projeChatEncrypt1\projeChatEncrypt\ConsoleApp1\obj\Debug\net5.0\ConsoleApp1.AssemblyInfoInputs.cache
+C:\Users\MTG\Desktop\projeChatEncrypt1\projeChatEncrypt\ConsoleApp1\obj\Debug\net5.0\ConsoleApp1.AssemblyInfo.cs
+C:\Users\MTG\Desktop\projeChatEncrypt1\projeChatEncrypt\ConsoleApp1\obj\Debug\net5.0\ConsoleApp1.csproj.CoreCompileInputs.cache
+C:\Users\MTG\Desktop\projeChatEncrypt1\projeChatEncrypt\ConsoleApp1\obj\Debug\net5.0\ConsoleApp1.dll
+C:\Users\MTG\Desktop\projeChatEncrypt1\projeChatEncrypt\ConsoleApp1\obj\Debug\net5.0\ref\ConsoleApp1.dll
+C:\Users\MTG\Desktop\projeChatEncrypt1\projeChatEncrypt\ConsoleApp1\obj\Debug\net5.0\ConsoleApp1.pdb
+C:\Users\MTG\Desktop\projeChatEncrypt1\projeChatEncrypt\ConsoleApp1\obj\Debug\net5.0\ConsoleApp1.genruntimeconfig.cache
