@@ -1,163 +1,153 @@
 ﻿using System;
 using System.Text;
 
-namespace projeChatEncrypt
+namespace ChatEncrypt
 {
-    class SPN
+    public class SPN
     {
-        private string plainText, bin_plainText, key, bin_Key, s_Boxes = "", cipherText;
+        public string message, binaryMessage, password, binaryPassword, sBox = "";
 
-        public SPN(string key)
+        public SPN() { }
+
+        public SPN(string password)
         {
-            this.key = key;
-            this.bin_Key = this.stringToBinary(this.key);
-        }
-        public SPN(string plain_Text, string key)
-        {
-            this.key = key;
-            this.bin_Key = this.stringToBinary(this.key);
-            this.plainText = plain_Text;
-            this.bin_plainText = this.stringToBinary(this.plainText);
+            this.password = password;
+            this.binaryPassword = this.StrToBin(this.password);
         }
 
-        //Convert string to binary
-        private string stringToBinary(string data)
+        public SPN(string message, string password)
+        {
+            this.password = password;
+            this.binaryPassword = this.StrToBin(this.password);
+            this.message = message;
+            this.binaryMessage = this.StrToBin(this.message);
+        }
+
+        public string StrToBin(string data)
         {
             string binary = "";
+
             for (int i = 0; i < data.Length; i++)
-            {
                 binary += Convert.ToString(data[i], 2).PadLeft(8, '0');
-            }
 
             return binary;
         }
 
-        // Convert binary to string
-        public string binaryToString(string enctxt)
+        public string BinToStr(string encodingText)
         {
-            // use your encoding here
-            Encoding enc = System.Text.Encoding.ASCII;
-
-            string binaryString = enctxt.Replace(" ", "");
-
+            Encoding utf8Encoding = Encoding.UTF8;
+            string binaryString = encodingText.Replace(" ", "");
+            var binLengt = (int)(binaryString.Length / 8);
             var bytes = new byte[binaryString.Length / 8];
 
-            var ilen = (int)(binaryString.Length / 8);
-
-            for (var i = 0; i < ilen; i++)
-            {
+            for (var i = 0; i < binLengt; i++)
                 bytes[i] = Convert.ToByte(binaryString.Substring(i * 8, 8), 2);
-            }
 
-            string str = enc.GetString(bytes);
+            string str = utf8Encoding.GetString(bytes);
 
             return str;
-
         }
 
-        private string xor(string text, string key)
+        public string Xor(string text, string password)
         {
-            string bin_xor = "";
-            int xor = 0;
-            for (int i = 0; i < 16; i++)// Do xor for every character
+            string binaryXor = "";
+            string txt = "";
+            string pass = "";
+            for (int i = 0; i < text.Length; i++)// Do xor for every character
             {
-                xor = Convert.ToInt32(text[i]) ^ Convert.ToInt32(key[i]);
-                bin_xor += xor.ToString();
+                txt += text[i].ToString();
+                pass += password[i].ToString();
+                int xor = Convert.ToInt32(text[i]) ^ Convert.ToInt32(password[i]);
+                binaryXor += xor.ToString();
             }
-            return bin_xor;
+            return binaryXor;
         }
 
-        private string substitution(string data)
+        public string Substitution(string data)
         {
-            string p_Data = "";
-            p_Data += data[2]; p_Data += data[8]; p_Data += data[12]; p_Data += data[5];
-            p_Data += data[9]; p_Data += data[0]; p_Data += data[14]; p_Data += data[4];
-            p_Data += data[11]; p_Data += data[1]; p_Data += data[15]; p_Data += data[6];
-            p_Data += data[3]; p_Data += data[10]; p_Data += data[7]; p_Data += data[13];
+            string permutationData = "";
+            permutationData += data[2];
+            permutationData += data[8];
+            permutationData += data[12];
+            permutationData += data[5];
+            permutationData += data[9];
+            permutationData += data[0];
+            permutationData += data[14];
+            permutationData += data[4];
+            permutationData += data[11];
+            permutationData += data[1];
+            permutationData += data[15];
+            permutationData += data[6];
+            permutationData += data[3];
+            permutationData += data[10];
+            permutationData += data[7];
+            permutationData += data[13];
 
-
-            return p_Data;
+            return permutationData;
         }
 
-        private string r_Substitution(string data)
+        public string ReverseSubstitution(string data)
         {
-            string rp_Data = "";
-            rp_Data += data[5]; rp_Data += data[9]; rp_Data += data[0]; rp_Data += data[12];
-            rp_Data += data[7]; rp_Data += data[3]; rp_Data += data[11]; rp_Data += data[14];
-            rp_Data += data[1]; rp_Data += data[4]; rp_Data += data[13]; rp_Data += data[8];
-            rp_Data += data[2]; rp_Data += data[15]; rp_Data += data[6]; rp_Data += data[10];
+            string reverseSubstitution = "";
+            reverseSubstitution += data[5];
+            reverseSubstitution += data[9];
+            reverseSubstitution += data[0];
+            reverseSubstitution += data[12];
+            reverseSubstitution += data[7];
+            reverseSubstitution += data[3];
+            reverseSubstitution += data[11];
+            reverseSubstitution += data[14];
+            reverseSubstitution += data[1];
+            reverseSubstitution += data[4];
+            reverseSubstitution += data[13];
+            reverseSubstitution += data[8];
+            reverseSubstitution += data[2];
+            reverseSubstitution += data[15];
+            reverseSubstitution += data[6];
+            reverseSubstitution += data[10];
 
-
-
-
-            return rp_Data;
-
+            return reverseSubstitution;
         }
 
-        public string encrypt()
+
+        public string Encryption()
         {
-
-            string xor = "";
-            string data = this.bin_plainText;
-
-            for (int i = 0; i < this.bin_plainText.Length; i += 16)
+            string cipherText = "";
+            for (int i = 0; i < this.binaryMessage.Length; i += 16)
             {
-                data = this.bin_plainText.Substring(i, 16);// Take 2 character of text (binary version)
-
+                string data = this.binaryMessage.Substring(i, 16);
                 for (int j = 0; j < 64; j += 16) // Take 2 character of key  (binary version)
                 {
-                    xor = this.xor(data, this.bin_Key.Substring(j, 16));
-
+                    string xor = this.Xor(data, this.binaryPassword.Substring(j, 16));
                     if (j < 32)// Don't use substitution if key is k2 and  k3
-                    {
-                        s_Boxes = this.substitution(xor);
-                    }
+                        sBox = this.Substitution(xor);
                     else
-                    {
-                        s_Boxes = xor;
-                    }
-
-                    data = s_Boxes;
-
+                        sBox = xor;
+                    data = sBox;
                 }
-                this.cipherText += data;
+                cipherText += data;
             }
-
-            return this.cipherText;
+            return cipherText;
         }
 
-        public string decrypt(string data)
+        public string Decryption(string data)
         {
-
-            string xor = "";
-            string plain_Text = "";
-            string cipher_Text = data;
-
-            for (int i = 0; i < cipher_Text.Length; i += 16)
+            string plainText = "";
+            for (int i = 0; i < data.Length; i += 16)
             {
-                data = cipher_Text.Substring(i, 16); // Take 2 character of crypted text  (binary version)
-
+                string cipherText = data.Substring(i, 16);
                 for (int j = 48; j >= 0; j -= 16) // Take 2 character of key  (binary version)
                 {
-                    xor = this.xor(data, this.bin_Key.Substring(j, 16));
-
+                    string xor = this.Xor(cipherText, this.binaryPassword.Substring(j, 16));
                     if (j == 48 || j == 0)// Don't use reverse substitution if key is k0 or  k3
-                    {
-                        s_Boxes = xor;
-                    }
+                        sBox = xor;
                     else
-                    {
-                        s_Boxes = this.r_Substitution(xor);
-                    }
-
-                    data = s_Boxes;
-
+                        sBox = this.ReverseSubstitution(xor);
+                    cipherText = sBox;
                 }
-
-                plain_Text += data;
+                plainText += cipherText;
             }
-
-            return this.binaryToString(plain_Text); // plain_Text is binary string so we have to convert it to  string
+            return this.BinToStr(plainText); // plain_Text is binary string so we have to convert it to  string
         }
     }
 }

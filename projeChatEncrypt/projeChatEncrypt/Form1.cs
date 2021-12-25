@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ChatEncrypt;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -16,7 +17,7 @@ using System.Windows.Forms;
 
 namespace projeChatEncrypt
 {
-    public partial class Form1 : Form
+    public partial class Form1 : MetroFramework.Forms.MetroForm
     {
         public Form1()
         {
@@ -63,37 +64,51 @@ namespace projeChatEncrypt
             {
                 byte[] receivedData = new byte[2048];
                 receivedData = (byte[])ar.AsyncState;
-                Sha256 sha256 = new Sha256();
-                localMessageEncrypt = sha256.SHA_256_Encrypting(password);
                 //converting byte to string
-                ASCIIEncoding uTF8Encoding = new ASCIIEncoding();
+                UTF8Encoding uTF8Encoding = new UTF8Encoding();
                 string receivedMessage = uTF8Encoding.GetString(receivedData);
                 string[] messages = receivedMessage.Split("---");
-                foreach (var item in messages)
-                {
-                    MessageBox.Show(item);
-                }
 
                 if (messages[0] == "sha256")
                 {
+                    Sha256 sha256 = new Sha256();
+                    localMessageEncrypt = sha256.Sha256_Encrypting(password);
+                    txtCipher.Text = localMessageEncrypt;
                     if (sha256Verify(messages[1]))
                     {
                         lstMessage.Items.Add("Karşım: " + messages[2]);
                     }
                     else
                         MessageBox.Show("Mesajınızı doğrulayınız...", "Dikkat", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    buffer = new byte[2048];
-                    socketMessage.BeginReceiveFrom(buffer, 0, buffer.Length, SocketFlags.None, ref epRemote, new AsyncCallback(MessageCallBack), buffer);
                 }
                 else if (messages[0] == "spn")
                 {
-                    SPN spn = new SPN(password);
-                    string dene = spn.decrypt(messages[1]);
-                    MessageBox.Show(dene);
-                    lstMessage.Items.Add(dene);
+                    if (messages[1].Trim() == "")
+                    {
+                        MessageBox.Show("Boş mesaj döndü.");
+                        return;
+                    }
+                    else if (password == "")
+                    {
+                        MessageBox.Show("Parola boş geçilemez.");
+                        return;
+                    }
+                    else if (password.Length != 8)
+                    {
+                        MessageBox.Show("Parola 8 uzunluğunda giriniz.");
+                        return;
+                    }
+                    else
+                    {
+                        txtCipher.Text = messages[1];
+                        SPN spn = new SPN(password);
+                        lstMessage.Items.Add("Karşım: " + spn.Decryption(txtCipher.Text));
+                    }
                 }
                 else
-                    MessageBox.Show("boş döndü");
+                    MessageBox.Show("Boş döndü");
+                buffer = new byte[2048];
+                socketMessage.BeginReceiveFrom(buffer, 0, buffer.Length, SocketFlags.None, ref epRemote, new AsyncCallback(MessageCallBack), buffer);
             }
             catch (Exception exp)
             {
@@ -103,32 +118,44 @@ namespace projeChatEncrypt
 
         private void btnSend_Click(object sender, EventArgs e)
         {
-            ASCIIEncoding uTF8Encoding = new ASCIIEncoding();
+            UTF8Encoding uTF8Encoding = new UTF8Encoding();
             byte[] sendingMessage = new byte[2048];
-            if (chckSha.Checked)
+            if (txtPlain.Text == "")
+            {
+                MessageBox.Show("Mesajı boş geçilemez.");
+                return;
+            }
+            else if (password == "")
+            {
+                MessageBox.Show("Parola boş geçilemez");
+                return;
+            }
+            if (rdSha.Checked)
             {
                 Sha256 sha256 = new Sha256();
-                localMessageEncrypt = sha256.SHA_256_Encrypting(password);
+                localMessageEncrypt = sha256.Sha256_Encrypting(password);
                 sendingMessage = uTF8Encoding.GetBytes("sha256" + "---" + localMessageEncrypt + "---" + txtPlain.Text);
             }
-            else if (chckSPN.Checked)
+            else if (rdSPN.Checked)
             {
-                txtPlain.Text = non_T_Chars(txtPlain.Text);
-                if (txtPlain.Text == "") { MessageBox.Show("Mesajı boş geçilemez.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation); }
-                else if (password == "") { MessageBox.Show("Parola boş geçilemez.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation); }
-                else if (password.Length != 8) { MessageBox.Show("Parola 8 uzunluğunda giriniz.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation); }
+                if (password.Length != 8)
+                {
+                    MessageBox.Show("Parola 8 uzunluğunda giriniz.");
+                    return;
+                }
                 else
                 {
-                    if (txtPlain.Text.Length % 2 == 1)
-                        txtPlain.Text += " ";
-                    else
+                    while (true)
                     {
-                        while (true)
+                        if (txtPlain.Text.Length % 2 == 1)
+                            txtPlain.Text += " ";
+                        else
                         {
-                            SPN spn = new SPN(txtPlain.Text, password);
-                            localMessageEncrypt = spn.encrypt().Trim();
-                            MessageBox.Show("----" + localMessageEncrypt + "----");
-                            if (localMessageEncrypt != "" || localMessageEncrypt != " ")
+                            SPN spn = new SPN();
+                            spn.binaryMessage = spn.StrToBin(txtPlain.Text);
+                            spn.binaryPassword = spn.StrToBin(password);
+                            localMessageEncrypt = spn.Encryption();
+                            if (localMessageEncrypt != "")
                                 break;
                         }
                     }
@@ -137,11 +164,9 @@ namespace projeChatEncrypt
             }
             else
                 MessageBox.Show("Lütfen şifreleme mantığı seçiniz.");
-
-            txtCipher.Text = localMessageEncrypt;
-
-            socketMessage.Send(sendingMessage);
             lstMessage.Items.Add("Ben: " + txtPlain.Text);
+            txtCipher.Text = localMessageEncrypt;
+            socketMessage.Send(sendingMessage);
         }
 
         private void btnVerify_Click(object sender, EventArgs e)
@@ -171,22 +196,6 @@ namespace projeChatEncrypt
             return true;
         }
 
-        private string non_T_Chars(string text)
-        {
-            text = text.Replace("İ", "I");
-            text = text.Replace("ı", "i");
-            text = text.Replace("Ğ", "G");
-            text = text.Replace("ğ", "g");
-            text = text.Replace("Ö", "O");
-            text = text.Replace("ö", "o");
-            text = text.Replace("Ü", "U");
-            text = text.Replace("ü", "u");
-            text = text.Replace("Ş", "S");
-            text = text.Replace("ş", "s");
-            text = text.Replace("Ç", "C");
-            text = text.Replace("ç", "c");
-            return text;
-        }
 
         private void btnSendFile_Click(object sender, EventArgs e)
         {
@@ -203,7 +212,7 @@ namespace projeChatEncrypt
                     sifreleAsync(fileName);
                     string[] splitDosya = fileName.Split(".");
                     string filePath = splitDosya[0] + ".zip";
-                    MessageBox.Show(filePath+"\nburdayım");
+                    MessageBox.Show("Dosya başarıyla gönderildi.");
                     new Thread(() =>
                     {
                         Sender.Send(ipAddress, port, filePath);
@@ -217,28 +226,18 @@ namespace projeChatEncrypt
             try
             {
                 this.Enabled = false; // Lock Main Window
-                await Task.Run(() => Crypt.EncryptFile("musa", dosya, dosya + ".ae"));
-                MessageBox.Show("Şifreleme başarılı!");
+                await Task.Run(() => Crypt.EncryptFile(password, dosya, dosya + ".ae"));
                 string sourceFolder = dosya + ".ae";
                 string[] splitDosya = dosya.Split('.');
                 string[] pathDosya = splitDosya[0].Split("\\");
                 string path = "";
                 for (int i = 0; i < pathDosya.Length - 1; i++)
                     path += (pathDosya[i] + "\\");
-                MessageBox.Show(path);
                 string targetZipFile = splitDosya[0] + ".zip";
-
-                //string targetFolder = @"D:\Dersler\Yazılım Sınama\unZippedProje";
-                //string sourceZipFile = @"D:\Dersler\Yazılım Sınama\zipProje.zip";
-
-                //ZipFile.ExtractToDirectory(sourceZipFile, targetFolder);
-
-                //ZipFile.CreateFromDirectory(sourceFolder, targetZipFile);
 
                 using (ZipArchive archive = ZipFile.Open(targetZipFile, ZipArchiveMode.Update))
                 {
                     archive.CreateEntryFromFile(sourceFolder, "NewEntry.ae");
-                    //archive.ExtractToDirectory(path);
                 }
                 File.Delete(sourceFolder);
             }
@@ -255,27 +254,24 @@ namespace projeChatEncrypt
             {
                 this.Enabled = false; // Lock Main Window
                 string sourceZipFile = dosya;
-                //string[] splitDosya = dosya.Split('.');
                 string[] pathDosya = sourceZipFile.Split("\\");
                 string path = "";
-                for (int i = 0; i < pathDosya.Length-1; i++)
+                for (int i = 0; i < pathDosya.Length; i++)
+                {
+                    string[] ayir = pathDosya[i].Split(".");
+                    if (ayir[ayir.Length - 1] == "zip")
+                        pathDosya[i] = pathDosya[i].Split(".")[0];
                     path += (pathDosya[i] + @"\");
-                MessageBox.Show(path);
-                string targetFolder = path + "unZip";
+                }
+                string targetFolder = path;
 
                 ZipFile.ExtractToDirectory(sourceZipFile, targetFolder);
 
-                //string targetFolder = @"D:\Dersler\Yazılım Sınama\unZippedProje";
-                //string sourceZipFile = @"D:\Dersler\Yazılım Sınama\zipProje.zip";
-
                 string pathFolder = targetFolder + @"\NewEntry.ae";
 
-                MessageBox.Show("path: "+pathFolder + "\ntarget: " + targetFolder+"\nsource: "+sourceZipFile);
-                //ZipFile.CreateFromDirectory(sourceFolder, targetZipFile);
-                await Task.Run(() => Crypt.DecryptFile("musa", pathFolder, targetFolder + @"\unZip.txt"));
+                await Task.Run(() => Crypt.DecryptFile(password, pathFolder, targetFolder + pathDosya[pathDosya.Length - 1] + ".txt"));
                 File.Delete(pathFolder);
                 File.Delete(sourceZipFile);
-                MessageBox.Show("Çözme başarılı!");
             }
             catch (Exception ex)
             {
@@ -316,20 +312,6 @@ namespace projeChatEncrypt
             }
         }
 
-        private void btnZip_Click(object sender, EventArgs e)
-        {
-            var file = new OpenFileDialog();
-            file.Multiselect = true;
-            file.Title = "Select Files";
-
-            if (file.ShowDialog() == DialogResult.OK)
-                foreach (string fileName in file.FileNames)
-                {
-                    sifreleAsync(fileName);
-                }
-            file.Dispose();
-        }
-
         private void btnUnZip_Click(object sender, EventArgs e)
         {
             var file = new SaveFileDialog();
@@ -340,6 +322,7 @@ namespace projeChatEncrypt
                     cozAsync(fileName);
                 }
             file.Dispose();
+            MessageBox.Show("Dosya başarıyla ayrıştırıldı.");
         }
 
         private void addlistViewSenderItem(ListViewItem lvi)

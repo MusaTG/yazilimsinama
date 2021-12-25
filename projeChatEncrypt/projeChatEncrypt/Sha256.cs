@@ -1,18 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography;
+﻿using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 
-namespace projeChatEncrypt
+namespace ChatEncrypt
 {
     public class Sha256
     {
-        public string SHA_256_Encrypting(string key)
+        public string Sha256_Encrypting(string password)
         {
             SHA256 sha = SHA256.Create();
-            byte[] valueBytes = Encoding.UTF8.GetBytes(key);
+            byte[] valueBytes = Encoding.UTF8.GetBytes(password);
             byte[] shaBytes = sha.ComputeHash(valueBytes);
             return HashToByte(shaBytes);
         }

@@ -1,11 +1,42 @@
 {
   "version": 3,
   "targets": {
-    "net5.0-windows7.0": {}
+    ".NETCoreApp,Version=v3.1": {
+      "MetroModernUI/1.4.0": {
+        "type": "package",
+        "compile": {
+          "lib/net/MetroFramework.Design.dll": {},
+          "lib/net/MetroFramework.Fonts.dll": {},
+          "lib/net/MetroFramework.dll": {}
+        },
+        "runtime": {
+          "lib/net/MetroFramework.Design.dll": {},
+          "lib/net/MetroFramework.Fonts.dll": {},
+          "lib/net/MetroFramework.dll": {}
+        }
+      }
+    }
   },
-  "libraries": {},
+  "libraries": {
+    "MetroModernUI/1.4.0": {
+      "sha512": "p2F3w8bF1tb0tpkDceEVO65UYMKnJxdQyNxVyl/OjrFZHighicLYZDppKkiqmvBZ10XUi2mqHiIJUzXBP3GElQ==",
+      "type": "package",
+      "path": "metromodernui/1.4.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net/MetroFramework.Design.dll",
+        "lib/net/MetroFramework.Fonts.dll",
+        "lib/net/MetroFramework.dll",
+        "metromodernui.1.4.0.nupkg.sha512",
+        "metromodernui.nuspec"
+      ]
+    }
+  },
   "projectFileDependencyGroups": {
-    "net5.0-windows7.0": []
+    ".NETCoreApp,Version=v3.1": [
+      "MetroModernUI >= 1.4.0"
+    ]
   },
   "packageFolders": {
     "C:\\Users\\MTG\\.nuget\\packages\\": {}
@@ -13,9 +44,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\MTG\\Desktop\\projeChatEncrypt1\\projeChatEncrypt\\projeChatEncrypt\\projeChatEncrypt.csproj",
-      "projectName": "projeChatEncrypt",
-      "projectPath": "C:\\Users\\MTG\\Desktop\\projeChatEncrypt1\\projeChatEncrypt\\projeChatEncrypt\\projeChatEncrypt.csproj",
+      "projectUniqueName": "C:\\Users\\MTG\\Desktop\\projeChatEncrypt1\\projeChatEncrypt\\projeChatEncrypt\\ChatEncrypt.csproj",
+      "projectName": "ChatEncrypt",
+      "projectPath": "C:\\Users\\MTG\\Desktop\\projeChatEncrypt1\\projeChatEncrypt\\projeChatEncrypt\\ChatEncrypt.csproj",
       "packagesPath": "C:\\Users\\MTG\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\MTG\\Desktop\\projeChatEncrypt1\\projeChatEncrypt\\projeChatEncrypt\\obj\\",
       "projectStyle": "PackageReference",
@@ -24,15 +55,15 @@
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
-        "net5.0-windows7.0"
+        "netcoreapp3.1"
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
-        "net5.0-windows7.0": {
-          "targetAlias": "net5.0-windows",
+        "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
           "projectReferences": {}
         }
       },
@@ -43,8 +74,14 @@
       }
     },
     "frameworks": {
-      "net5.0-windows7.0": {
-        "targetAlias": "net5.0-windows",
+      "netcoreapp3.1": {
+        "targetAlias": "netcoreapp3.1",
+        "dependencies": {
+          "MetroModernUI": {
+            "target": "Package",
+            "version": "[1.4.0, )"
+          }
+        },
         "imports": [
           "net461",
           "net462",
@@ -66,5 +103,17 @@
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.101\\RuntimeIdentifierGraph.json"
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "'MetroModernUI 1.4.0' paketi, proje hedef çerçevesi '.NETCoreApp,Version=v3.1' yerine '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' kullanılarak geri yüklendi. Bu paket projenizle tamamen uyumlu olmayabilir.",
+      "libraryId": "MetroModernUI",
+      "targetGraphs": [
+        ".NETCoreApp,Version=v3.1"
+      ]
+    }
+  ]
 }
