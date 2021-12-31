@@ -29,7 +29,7 @@ namespace projeChatEncrypt
         EndPoint epLocal, epRemote;
         byte[] buffer;
         string localMessageEncrypt = "";
-        string password;
+        string password = "";
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -39,23 +39,34 @@ namespace projeChatEncrypt
 
         private void btnConnect_Click(object sender, EventArgs e)
         {
-            epLocal = new IPEndPoint(IPAddress.Parse(GetLocalIp()), Convert.ToInt32(txtLocalPort.Text));
-            socketMessage.Bind(epLocal);
-
-            epRemote = new IPEndPoint(IPAddress.Parse(GetLocalIp()), Convert.ToInt32(txtRemotePort.Text));
-            socketMessage.Connect(epRemote);
-
-            buffer = new byte[2048];
-            socketMessage.BeginReceiveFrom(buffer, 0, buffer.Length, SocketFlags.None, ref epRemote, new AsyncCallback(MessageCallBack), buffer);
-
-            try
+            if (!socketMessage.Connected)
             {
-                Listen.Start(int.Parse(txtRemotePort.Text));
+                if (txtLocalPort.Text != "" && txtRemotePort.Text != "")
+                {
+                    epLocal = new IPEndPoint(IPAddress.Parse(GetLocalIp()), Convert.ToInt32(txtLocalPort.Text));
+                    socketMessage.Bind(epLocal);
+
+                    epRemote = new IPEndPoint(IPAddress.Parse(GetLocalIp()), Convert.ToInt32(txtRemotePort.Text));
+                    socketMessage.Connect(epRemote);
+
+                    buffer = new byte[2048];
+                    socketMessage.BeginReceiveFrom(buffer, 0, buffer.Length, SocketFlags.None, ref epRemote, new AsyncCallback(MessageCallBack), buffer);
+                    
+                    try
+                    {
+                        Listen.Start(int.Parse(txtRemotePort.Text));
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+                }
+                else
+                    MessageBox.Show("Portlar boş geçilemez.");
+
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+            else
+                MessageBox.Show("Zaten bağlı.");
         }
 
         private void MessageCallBack(IAsyncResult ar)
@@ -118,8 +129,6 @@ namespace projeChatEncrypt
 
         private void btnSend_Click(object sender, EventArgs e)
         {
-            UTF8Encoding uTF8Encoding = new UTF8Encoding();
-            byte[] sendingMessage = new byte[2048];
             if (txtPlain.Text == "")
             {
                 MessageBox.Show("Mesajı boş geçilemez.");
@@ -130,43 +139,55 @@ namespace projeChatEncrypt
                 MessageBox.Show("Parola boş geçilemez");
                 return;
             }
-            if (rdSha.Checked)
-            {
-                Sha256 sha256 = new Sha256();
-                localMessageEncrypt = sha256.Sha256_Encrypting(password);
-                sendingMessage = uTF8Encoding.GetBytes("sha256" + "---" + localMessageEncrypt + "---" + txtPlain.Text);
-            }
             else if (rdSPN.Checked)
-            {
                 if (password.Length != 8)
                 {
                     MessageBox.Show("Parola 8 uzunluğunda giriniz.");
                     return;
                 }
-                else
+            IsConnect(SendingMessage());
+        }
+        public byte[] SendingMessage()
+        {
+            UTF8Encoding uTF8Encoding = new UTF8Encoding();
+            if (rdSha.Checked)
+            {
+                Sha256 sha256 = new Sha256();
+                localMessageEncrypt = sha256.Sha256_Encrypting(password);
+                return uTF8Encoding.GetBytes("sha256" + "---" + localMessageEncrypt + "---" + txtPlain.Text);
+            }
+            else if (rdSPN.Checked)
+            {
+                while (true)
                 {
-                    while (true)
+                    if (txtPlain.Text.Length % 2 == 1)
+                        txtPlain.Text += " ";
+                    else
                     {
-                        if (txtPlain.Text.Length % 2 == 1)
-                            txtPlain.Text += " ";
-                        else
-                        {
-                            SPN spn = new SPN();
-                            spn.binaryMessage = spn.StrToBin(txtPlain.Text);
-                            spn.binaryPassword = spn.StrToBin(password);
-                            localMessageEncrypt = spn.Encryption();
-                            if (localMessageEncrypt != "")
-                                break;
-                        }
+                        SPN spn = new SPN();
+                        spn.binaryMessage = spn.StrToBin(txtPlain.Text);
+                        spn.binaryPassword = spn.StrToBin(password);
+                        localMessageEncrypt = spn.Encryption();
+                        if (localMessageEncrypt != "")
+                            break;
                     }
                 }
-                sendingMessage = uTF8Encoding.GetBytes("spn" + "---" + localMessageEncrypt);
+                return uTF8Encoding.GetBytes("spn" + "---" + localMessageEncrypt);
             }
             else
                 MessageBox.Show("Lütfen şifreleme mantığı seçiniz.");
-            lstMessage.Items.Add("Ben: " + txtPlain.Text);
-            txtCipher.Text = localMessageEncrypt;
-            socketMessage.Send(sendingMessage);
+            return null;
+        }
+        public void IsConnect(byte[] sendingMessage)
+        {
+            if (socketMessage.Connected)
+            {
+                lstMessage.Items.Add("Ben: " + txtPlain.Text);
+                txtCipher.Text = localMessageEncrypt;
+                socketMessage.Send(sendingMessage);
+            }
+            else
+                MessageBox.Show("Bağlantı yok");
         }
 
         private void btnVerify_Click(object sender, EventArgs e)
@@ -199,9 +220,9 @@ namespace projeChatEncrypt
 
         private void btnSendFile_Click(object sender, EventArgs e)
         {
+
             IPAddress ipAddress = IPAddress.Parse(GetLocalIp());
             int port = int.Parse(txtLocalPort.Text);
-
             var file = new OpenFileDialog();
             file.Multiselect = true;
             file.Title = "Select Files";

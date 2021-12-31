@@ -18,7 +18,7 @@ namespace ChatEncrypt
             StringBuilder result = new StringBuilder();
             foreach (byte item in shaBytes)
             {
-                result.Append(item.ToString("x2"));
+                result.Append($"{item:x2}");
             }
             return result.ToString();
         }

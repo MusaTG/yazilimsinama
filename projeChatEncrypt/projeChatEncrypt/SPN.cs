@@ -53,7 +53,7 @@ namespace ChatEncrypt
             string binaryXor = "";
             string txt = "";
             string pass = "";
-            for (int i = 0; i < text.Length; i++)// Do xor for every character
+            for (int i = 0; i < text.Length; i++)
             {
                 txt += text[i].ToString();
                 pass += password[i].ToString();
@@ -116,10 +116,10 @@ namespace ChatEncrypt
             for (int i = 0; i < this.binaryMessage.Length; i += 16)
             {
                 string data = this.binaryMessage.Substring(i, 16);
-                for (int j = 0; j < 64; j += 16) // Take 2 character of key  (binary version)
+                for (int j = 0; j < 64; j += 16)
                 {
                     string xor = this.Xor(data, this.binaryPassword.Substring(j, 16));
-                    if (j < 32)// Don't use substitution if key is k2 and  k3
+                    if (j < 32)
                         sBox = this.Substitution(xor);
                     else
                         sBox = xor;
@@ -136,10 +136,10 @@ namespace ChatEncrypt
             for (int i = 0; i < data.Length; i += 16)
             {
                 string cipherText = data.Substring(i, 16);
-                for (int j = 48; j >= 0; j -= 16) // Take 2 character of key  (binary version)
+                for (int j = 48; j >= 0; j -= 16)
                 {
                     string xor = this.Xor(cipherText, this.binaryPassword.Substring(j, 16));
-                    if (j == 48 || j == 0)// Don't use reverse substitution if key is k0 or  k3
+                    if (j == 48 || j == 0)
                         sBox = xor;
                     else
                         sBox = this.ReverseSubstitution(xor);
@@ -147,7 +147,7 @@ namespace ChatEncrypt
                 }
                 plainText += cipherText;
             }
-            return this.BinToStr(plainText); // plain_Text is binary string so we have to convert it to  string
+            return this.BinToStr(plainText);
         }
     }
 }
